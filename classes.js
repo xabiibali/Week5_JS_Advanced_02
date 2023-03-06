@@ -1,11 +1,16 @@
 /*
-  Object oriented design is commonly used in video games.  For this part of the assignment you will be implementing several classes with their correct inheritance hierarchy.
+  Object oriented design is commonly used in video games.  For this part
+ of the assignment you will be implementing several classes with their 
+  correct inheritance hierarchy.
 
-  In this file you will be creating three classes: GameObject, CharacterStats, Humanoid.  
+  In this file you will be creating three classes: GameObject,
+   CharacterStats, Humanoid.  
 
-  At the bottom of this file are 3 objects that all end up inheriting from Humanoid.  Use the objects at the bottom of the page to test your classes.
+  At the bottom of this file are 3 objects that all end up inheriting from
+ Humanoid.  Use the objects at the bottom of the page to test your classes.
   
-  Each class has unique properties and methods that are defined in their block comments below:
+  Each class has unique properties and methods that are defined in 
+  their block comments below:
 */
 
 // ++++ Example Class +++++
@@ -36,14 +41,35 @@ console.log("This is example result: ", fred.task());
   * dimensions (These represent the character's size in the video game)
   * destroy() // A method that returns: `${this.name} was removed from the game.`
 */
+class GameObject {
+  constructor(att){
+    this.createdAt = att.createdAt;
+    this.name = att.name;
+    this.dimensions = att.dimensions;
+  }
+  
+  destroy(){
+    return `${this.name} was removed from the game.`
+    
+  }
 
+}
 /*
   === CharacterStats ===
   * healthPoints
   * takeDamage() // A method -> returns the string '<object name> took damage.'
   * should inherit destroy() from GameObject's method
 */
+class CharacterStats extends GameObject{
+  constructor(att){
+    super(att)
+    this.healthPoints = att.healthPoints; 
+  }
 
+  takeDamage(){
+    return `${this.name} took damage`
+  }
+}
 /*
   === Humanoid (Having an appearance or character resembling that of a human.) ===
   * team
@@ -54,6 +80,20 @@ console.log("This is example result: ", fred.task());
   * should inherit takeDamage() from CharacterStats
 */
  
+class Humanoid extends CharacterStats{
+  constructor(att){
+    super(att)
+    this.team = att.team;
+    this.weapons = att.weapons;
+    this.language = att.language;
+  }
+
+  greet(){
+   return `${this.name} offers a greeting in ${this.language} `
+  }
+}
+
+
 /*
   * Inheritance chain: GameObject -> CharacterStats -> Humanoid
   * Instances of Humanoid should have all of the same properties as CharacterStats and GameObject.
@@ -62,7 +102,7 @@ console.log("This is example result: ", fred.task());
 
 // Test you work by un-commenting these 3 objects and the list of console logs below:
 
-/*
+
   const mage = new Humanoid({
     createdAt: new Date(),
     dimensions: {
@@ -123,7 +163,7 @@ console.log("This is example result: ", fred.task());
   console.log(archer.greet()); // Lilith offers a greeting in Elvish.
   console.log(mage.takeDamage()); // Bruce took damage.
   console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
-*/
+
 
   // Stretch task: 
   // * Create Villain and Hero class that inherit from the Humanoid class.  
